@@ -1,16 +1,3 @@
-hai guys, what we need to do is:
-
-do backend crud for the nusantara site with php
-
-korang jgn lupa clone repo dlm htdocs dkt xampp
-
-- get data = basically display data
-- update data (put)
-- delete data
-- post data = form to add data dan juga add data dari collections.json into database
-
-db details ada dlm createdb.php
-
 Lab Assignment (4person/group): warisannusantara
 Store the collections.json record (from last week) to the database (same database as above), table collection (you can save image data as link or blob)
 
@@ -18,3 +5,13 @@ Modify the code warisannusantara.html (from last week) to make a get request and
 
 zip the project and submit to elearning (week10)
 
+GROUP 4
+1 - Ahmad Faruq
+2 - Khairul Izzat
+3 - Ieskandar
+4 - Brendan Dylan
+
+
+How to run
+1 - run warisannusantara.php
+2 - manually run json_mysql.php to get data from collections.json

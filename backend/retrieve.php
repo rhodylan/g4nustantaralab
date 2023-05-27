@@ -25,6 +25,7 @@ if ($result->num_rows > 0) {
       "gambar" => $row["gambar"],
       "nama" => $row["nama"],
       "kategori" => $row["kategori"],
+      "date" => $row["date"],
       "desc" => $row["descript"]
     );
     $semuaCollection[] = $koleksi;
