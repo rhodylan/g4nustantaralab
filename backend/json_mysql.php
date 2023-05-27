@@ -9,7 +9,7 @@ $data = file_get_contents($filename);
 $array = json_decode($data, true);
 
 foreach ($array["semuaCollection"] as $row) {
-    $sql = "INSERT INTO koleksi (nama, kategori, descript, gambar) VALUES ('".$row["nama"]."', '".$row["kategori"]."','".$row["desc"]."','".$row["gambar"]."')";
+    $sql = "INSERT INTO koleksi (nama, kategori, descript, date, gambar) VALUES ('".$row["nama"]."', '".$row["kategori"]."','".$row["desc"]."','".$row["date"]."' ,'".$row["gambar"]."')";
     mysqli_query($conn, $sql);
 }
 
