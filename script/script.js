@@ -1,25 +1,8 @@
 $(document).ready(function(){
 
-    //create card using javascripts
-    // $('#card-content').append('<div class="card my-3"><img class="card-img-top" src="images/badik.jpg" /><div class="card-body"><h5 class="card-title">Badik</h5><h5 class="card-title">Category: textile</h5><h5 class="card-title">Name: Keris</h5><p class="card-text">Badik adalah senjata tradisional yang berasal dari Sulawesi Selatan. Badik merupakan senjata tradisional yang digunakan oleh masyarakat Bugis dan Makassar. Badik memiliki bentuk yang unik dan berbeda dengan senjata tradisional lainnya. Badik memiliki bentuk yang menyerupai pisau dengan gagang yang pendek. Badik memiliki panjang sekitar 30 cm dan memiliki lebar sekitar 3 cm. Badik memiliki bentuk yang menyerupai pisau dengan gagang yang pendek. Badik memiliki panjang sekitar 30 cm dan memiliki lebar sekitar 3 cm. Badik memiliki bentuk yang menyerupai pisau dengan gagang yang pendek. Badik memiliki panjang sekitar 30 cm dan memiliki lebar sekitar 3 cm.</p><h5 class="card-title">Description: tenunan tangan asli</h5><h5 class="card-title">Date: 1250 Hijrah</h5><a href="#" class="btn btn-primary">Go somewhere</a></div></div>')
-
-    //getJSON - expecting response data in JSON format
-    // $.getJSON("entity/collections.json", function(data){
-    //   console.log(data);
-    // }).fail(function(error){
-    //   console.log(error);
-    // });
-
-    //get
-    // $.get("entity/collections.json", function(data){
-    //   console.log(data);
-    // }).fail(function(error){
-    //   console.log(error);
-    // });
-
     //ajax
     $.ajax({
-      url: "entity/collections.json",
+      url: "backend/retrieve.php",
       type: "get",
       success: function(data){
         let semuaCollection = data.semuaCollection;
@@ -31,10 +14,23 @@ $(document).ready(function(){
           $.each(semuaCollection, function(i, koleksi){
             if(category === 'all collections'){
               $('#view-collection').text("all collections");
-              $('#card-content').append('<div class="col-md-4"><div class="card my-3"><img class="card-img-top" src="images/'+koleksi.gambar+'" /><div class="card-body"><h5 class="card-title">'+koleksi.nama+'</h5><h5 class="card-title">Category: '+koleksi.kategori+'</h5><p class="card-text">'+koleksi.desc+'</p><h5 class="card-title">Date:'+koleksi.date+'</h5><a href="#" class="btn btn-primary">Go somewhere</a></div></div></div>')
+              $('#card-content').append('<div class="col-md-4"><div class="card my-3"><img class="card-img-top" src="images/' + koleksi.gambar +
+              '" /><div class="card-body"><h5 class="card-title">' + koleksi.nama +
+              '</h5><h5 class="card-title">Category: ' + koleksi.kategori +
+              '</h5><p class="card-text">' + koleksi.desc +
+              '</p><h5 class="card-title">Date:' + koleksi.date +
+              '</h5><button class="btn btn-primary go-somewhere" id="' + koleksi.nama + '">Go somewhere</button>' +
+              '<button class="btn btn-danger delete-card" data-id="' + koleksi.nama + '">Delete</button></div></div></div>');
+
             }else if(category === koleksi.kategori){
               $('#view-collection').text(currentCategory + ' collections')
-              $('#card-content').append('<div class="col-md-4"><div class="card my-3"><img class="card-img-top" src="images/'+koleksi.gambar+'" /><div class="card-body"><h5 class="card-title">'+koleksi.nama+'</h5><h5 class="card-title">Category: '+koleksi.kategori+'</h5><p class="card-text">'+koleksi.desc+'</p><h5 class="card-title">Date:'+koleksi.date+'</h5><a href="#" class="btn btn-primary">Go somewhere</a></div></div></div>')
+              $('#card-content').append('<div class="col-md-4"><div class="card my-3"><img class="card-img-top" src="images/' + koleksi.gambar +
+              '" /><div class="card-body"><h5 class="card-title">' + koleksi.nama +
+              '</h5><h5 class="card-title">Category: ' + koleksi.kategori +
+              '</h5><p class="card-text">' + koleksi.desc +
+              '</p><h5 class="card-title">Date:' + koleksi.date +
+              '</h5><button class="btn btn-primary go-somewhere" id="' + koleksi.nama + '">Go somewhere</button>' +
+              '<button class="btn btn-danger delete-card" data-id="' + koleksi.nama + '">Delete</button></div></div></div>');
             }
           })
         }
@@ -48,17 +44,80 @@ $(document).ready(function(){
           $(this).addClass('active');
           filterCard(currentCategory);
         })
-
-        // $.each(semuaCollection, function(i, koleksi){
-        //   console.log(i);
-        //   console.log(koleksi)
-        //   $('#card-content').append('<div class="col-md-4"><div class="card my-3"><img class="card-img-top" src="images/'+koleksi.gambar+'" /><div class="card-body"><h5 class="card-title">'+koleksi.nama+'</h5><h5 class="card-title">Category: '+koleksi.kategori+'</h5><h5 class="card-title">Name: Keris</h5><p class="card-text">'+koleksi.desc+'</p><h5 class="card-title">Date:'+koleksi.date+'</h5><a href="#" class="btn btn-primary">Go somewhere</a></div></div></div>')
-        // })
-
       },
       error: function(error){
         console.log(error)
       }
 
+      
+
     })
+
+    // function addEditDeleteButtons() {
+    //   // Create the Edit button
+    //   var editButton = document.createElement("button");
+    //   editButton.textContent = "Edit";
+      
+    //   // Create the Delete button
+    //   var deleteButton = document.createElement("button");
+    //   deleteButton.textContent = "Delete";
+      
+    //   // Add event listeners to the Edit and Delete buttons
+    //   editButton.addEventListener("click", editCard);
+    //   deleteButton.addEventListener("click", deleteCard);
+      
+    //   // Append the Edit and Delete buttons to the card
+    //   var cardBody = this.parentNode;
+    //   cardBody.appendChild(editButton);
+    //   cardBody.appendChild(deleteButton);
+      
+    //   // Remove the "Go Somewhere" button
+    //   this.remove();
+    // }
+    
+    // function editCard() {
+    //   // Logic for editing the card
+    //   console.log("Editing the card...");
+    // }
+    
+     function deleteCard(itemname) {
+      $.ajax({
+        url: 'backend/delete_card.php',
+        type: 'POST',
+        data: { id: itemname },
+        success: function(response) {
+          console.log('Delete response:', response);
+          location.reload();
+        },
+        error: function(error) {
+          console.log('Delete error:', error);
+        }
+      });
+    // //
+    console.log('Delete in delete function:', itemname);
+     }
+    
+    // // ...
+    
+    // // Update the event listener for the "Go Somewhere" button
+    // $(document).on("click", ".btn-primary", addEditDeleteButtons);
+
+    // Click event listener for "Go somewhere" button
+$(document).on('click', '.go-somewhere', function() {
+  var idValue = $(this).attr('id');
+  console.log('Button ID value:', idValue);
+});
+
+// Click event listener for "Delete" button
+$(document).on('click', '.delete-card', function() {
+  var itemname = $(this).data('id');
+  deleteCard(itemname)
+});
+
+   
+
+    
+    
+  
+
   })
